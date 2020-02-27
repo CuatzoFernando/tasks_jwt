@@ -23,12 +23,12 @@ const addOrUpdate = async (req,res) =>{
 	let user_find = User.findOne({ email: req.body.email })
 	if ( user_find ) {
 		if (req.params.id) {
-			res.json(await User.findOneAndUpdate(req.params.id, user))
+			res.json(User.findOneAndUpdate(req.params.id, user))
 		} else {
 			res.json('Email registrado con anterioridad')
 		}
   	} else {
-  		res.json(await User.create(user))
+  		res.json(User.create(user))
   	}
 }
 

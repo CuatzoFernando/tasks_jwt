@@ -10,16 +10,16 @@
           <a class="nav-link" routerLink="/tasks" routerLinkActive="active">Tasks</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/private" routerLinkActive="active">Private</a>
+          <a class="nav-link" routerLink="/tasks-create" routerLinkActive="active">Agregar Tarea</a>
         </li>
       </ul>
       <ul class="navbar-nav ml-auto">
         <ng-container *ngIf="!authService.loggedIn(); else loggedIn">
           <li class="nav-item">
-            <a class="nav-link" routerLink="/signin" routerLinkActive="active">SignIn</a>
+            <a class="nav-link" routerLink="/signin" routerLinkActive="active">Ingresar</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/signup" routerLinkActive="active">SignUp</a>
+            <a class="nav-link" routerLink="/signup" routerLinkActive="active">Registro</a>
           </li>
         </ng-container>
         <ng-template #loggedIn>

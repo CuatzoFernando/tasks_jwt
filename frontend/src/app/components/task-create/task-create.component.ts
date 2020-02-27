@@ -1,29 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service'
+import { TaskService } from '../../services/task.service'
 import { Router } from '@angular/router'
 
 @Component({
-  selector: 'app-signin',
-  templateUrl: './signin.component.html',
-  styleUrls: ['./signin.component.css']
+  selector: 'app-task-create',
+  templateUrl: './task-create.component.html',
+  styleUrls: ['./task-create.component.css']
 })
-export class SigninComponent implements OnInit {
-  user = {};
+export class TaskCreateComponent implements OnInit {
 
+  task = {}
   constructor(
     private authService: AuthService,
+    private taskService: TaskService,
     private router: Router
-  ) { }
+    ) { }
 
   ngOnInit() {
   }
 
-  signIn() {
-    this.authService.signInUser(this.user)
-      .subscribe(
+  addTask(){
+    this.taskService.addTasks(this.task).subscribe(
         res => {
           console.log(res);
-          localStorage.setItem('token', res.token);
           this.router.navigate(['/tasks']);
         },
         err => console.log(err)

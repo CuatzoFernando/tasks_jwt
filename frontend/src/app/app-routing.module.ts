@@ -2,9 +2,10 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 // Components
 import { TasksComponent } from './components/tasks/tasks.component';
-import { PrivateTasksComponent } from './components/private-tasks/private-tasks.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { TaskCreateComponent} from './components/task-create/task-create.component'
+import { TaskEditComponent} from './components/task-edit/task-edit.component'
 import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
@@ -18,8 +19,13 @@ const routes: Routes = [
     component: TasksComponent
   },
   {
-    path: 'private',
-    component: PrivateTasksComponent,
+    path: 'tasks-create',
+    component: TaskCreateComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'task-edit/:id',
+    component: TaskEditComponent,
     canActivate: [AuthGuard]
   },
   {

@@ -8,6 +8,11 @@ const getTasks = async(req,res) =>{
 	res.json(tasks)
 }
 
+const getTask = async(req,res) =>{
+	const task = await Task.findOne({ _id: req.params.id})
+	res.json(task)
+}
+
 const addTask = async (req,res, next) => {
 	let tasks = await Task.create(req.body)
 
@@ -26,4 +31,4 @@ const deleteTask = async(req,res) =>{
 	res.json(tasks)
 }
 
-module.exports = { getTasks, addTask, updateTask, deleteTask }
+module.exports = { getTasks, addTask, getTask, updateTask, deleteTask }

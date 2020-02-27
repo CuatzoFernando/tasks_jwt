@@ -13,8 +13,19 @@ export class TaskService {
     return this.http.get<any>(this.URL + '/tasks');
   }
 
-  getPrivateTasks() {
-    return this.http.get<any>(this.URL + '/private-tasks');
+  getTask(id) {
+    return this.http.get<any>(this.URL + '/task/'+id);
   }
 
+	addTasks(task){
+	  	return this.http.post<any>(this.URL + '/tasks', task);
+	}
+
+  editTasks(id,task){
+    return this.http.put(this.URL+'/tasks/'+ id, task)
+  }
+
+  deleteTask(id){
+    return this.http.delete(this.URL+'/tasks/'+ id)
+  }
 }
