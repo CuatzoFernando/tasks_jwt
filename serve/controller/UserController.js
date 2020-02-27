@@ -10,7 +10,7 @@ const getUsers = async(req,res) =>{
 	res.json(users)
 }
 
-const addUser = async (req,res) => {
+const addOrUpdate = async (req,res) =>{
 	let passwordsignup = await bcrypt.hash(req.body.password, salt)
 	let user = {
 		name: req.body.name,
@@ -19,25 +19,17 @@ const addUser = async (req,res) => {
 		email: req.body.email,
 		password: passwordsignup
 	}
-	let users = await User.create(user)
 
-  	res.json({
-  		users: users
-  	})
-}
-
-
-const updateUser = async(req,res) => {
-	let passwordsignup = await bcrypt.hash(req.body.password, salt)
-	let user = {
-		name: req.body.name,
-		lastname: req.body.lastname,
-		username: req.body.username,
-		email: req.body.email,
-		password: passwordsignup
-	}
-	const users = await User.findOneAndUpdate(req.params.id, user)
-    res.json(users)
+	let user_find = User.findOne({ email: req.body.email })
+	if ( user_find ) {
+		if (req.params.id) {
+			res.json(await User.findOneAndUpdate(req.params.id, user))
+		} else {
+			res.json('Email registrado con anterioridad')
+		}
+  	} else {
+  		res.json(await User.create(user))
+  	}
 }
 
 const deleteUser = async(req,res) =>{
@@ -60,4 +52,4 @@ const signin = async (req,res)=>{
 	}
 }
 
-module.exports = { getUsers, addUser, updateUser, deleteUser, signin }
+module.exports = { getUsers, addOrUpdate, deleteUser, signin }

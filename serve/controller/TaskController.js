@@ -4,7 +4,7 @@
 const Task = require('../model/Task')
 
 const getTasks = async(req,res) =>{
-	const tasks = await Task.find({ privated: false})
+	const tasks = await Task.find()
 	res.json(tasks)
 }
 
