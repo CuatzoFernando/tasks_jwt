@@ -3,12 +3,13 @@ const router = Router()
 
 const tasks = require('../controller/TaskController')
 const user = require('../controller/UserController')
+const verifyToken = require('../middleware/signinMiddleware')
 
 router.get('/tasks', tasks.getTasks)
-router.get('/task/:id', tasks.getTask)
-router.post('/tasks', tasks.addTask)
-router.put('/tasks/:id', tasks.updateTask)
-router.delete('/tasks/:id', tasks.deleteTask)
+router.get('/task/:id', verifyToken, tasks.getTask)
+router.post('/tasks', verifyToken, tasks.addTask)
+router.put('/tasks/:id', verifyToken, tasks.updateTask)
+router.delete('/tasks/:id',verifyToken, tasks.deleteTask)
 
 router.get('/users', user.getUsers)
 router.post('/users', user.addOrUpdate)
