@@ -20,7 +20,7 @@ const addOrUpdate = async (req,res) =>{
 		password: passwordsignup
 	}
 
-	let user_find = User.findOne({ email: req.body.email })
+	let user_find = await User.findOne({ email: req.body.email })
 	if ( user_find ) {
 		if (req.params.id) {
 			res.json(User.findOneAndUpdate(req.params.id, user))
