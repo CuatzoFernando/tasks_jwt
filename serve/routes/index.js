@@ -3,7 +3,7 @@ const router = Router()
 
 const tasks = require('../controller/TaskController')
 const user = require('../controller/UserController')
-const verifyToken = require('../middleware/signinMiddleware')
+const { verifyToken } = require('../middleware/signinMiddleware')
 
 router.get('/tasks', tasks.getTasks)
 router.get('/task/:id', verifyToken, tasks.getTask)
